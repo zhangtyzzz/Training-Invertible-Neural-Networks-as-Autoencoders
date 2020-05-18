@@ -155,9 +155,9 @@ def plot_reconst(model, loader, latent_dim, device='cpu', num_img=1, grid_row_si
         binary_label = lat_img.new_zeros(lat_img.size(0), 10)
         idx = torch.arange(label.size(0), dtype=torch.long)
         binary_label[idx, label] = 1
-        lat_img_mod = torch.cat([lat_img.new_empty((lat_img[:, :latent_dim]).shape).normal_, binary_label, lat_img.new_zeros((lat_img[:, latent_dim+10:]).shape)], dim=1)
+        lat_img_mod = torch.cat([lat_img.new_empty((lat_img[:, :latent_dim]).shape).normal_(), binary_label, lat_img.new_zeros((lat_img[:, latent_dim+10:]).shape)], dim=1)
     else:
-        lat_img_mod = torch.cat([lat_img.new_empty((lat_img[:, :latent_dim]).shape).normal_, lat_img.new_zeros((lat_img[:, latent_dim:]).shape)], dim = 1)
+        lat_img_mod = torch.cat([lat_img.new_empty((lat_img[:, :latent_dim]).shape).normal_(), lat_img.new_zeros((lat_img[:, latent_dim:]).shape)], dim = 1)
 
     lat_img_mod = lat_img_mod.view(shape)
     output = model(lat_img_mod, rev=True)
